@@ -1,67 +1,97 @@
 import styled from "styled-components";
 
-export const Container = styled.footer`
-  background-color: #f8f9fb;
-  padding: 50px 20px 20px;
+export const FooterContainer = styled.footer`
+  background: #14224a;
+  color: white;
+  margin-top: 80px;
 `;
 
-export const FooterWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  max-width: 1100px;
+export const FooterContent = styled.div`
+  max-width: 1200px;
   margin: auto;
-`;
 
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
 
-export const Logo = styled.h3`
-  font-size: 16px;
-  font-weight: 700;
-  color: #2f80ed;
-  margin-bottom: 10px;
-`;
+  gap: 50px;
 
-export const Title = styled.h4`
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 12px;
-`;
+  padding: 60px 30px;
 
-export const Text = styled.p`
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 8px;
-  line-height: 1.5;
-`;
+  align-items: flex-start;
 
-export const LinkItem = styled.a`
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 6px;
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    color: #2f80ed;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-export const Image = styled.img`
-  width: 100%;
-  max-width: 150px;
-  border-radius: 8px;
-  margin-bottom: 8px;
+export const FooterColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  justify-content: flex-start;
+
+  height: 100%;
 `;
 
-export const BottomBar = styled.div`
-  margin-top: 40px;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
+export const FooterTitle = styled.h3`
+  font-size: 24px;
+  font-weight: 700;
+
+  margin-bottom: 14px;
+
+  white-space: nowrap;
+`;
+
+export const FooterText = styled.p`
+  color: #dbe4ff;
+
+  line-height: 1.8;
+
+  font-size: 15px;
+`;
+
+export const FooterLink = styled.a`
+  color: #dbe4ff;
+
+  text-decoration: none;
+
+  transition: 0.3s;
+
+  width: fit-content;
+
+  &:hover {
+    color: #60a5fa;
+    transform: translateX(5px);
+  }
+`;
+
+export const MapFrame = styled.iframe`
+  width: 100%;
+
+  height: 200px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: white;
+
+  margin-top: 5px;
+`;
+
+export const FooterBottom = styled.div`
+  border-top: 1px solid rgba(255,255,255,0.1);
+
   text-align: center;
-  font-size: 12px;
-  color: #888;
+
+  padding: 20px;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+`;
+
+export const MapLink = styled.a`
+  text-decoration: none;
 `;

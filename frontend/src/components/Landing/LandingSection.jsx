@@ -1,12 +1,12 @@
+// LandingSection.jsx
+
 import {
   LandingContainer,
   Left,
-  Tag,
   Title,
   Desc,
   ButtonGroup,
   PrimaryBtn,
-  SecondaryBtn,
   Right,
 } from "./landingStyled";
 
@@ -14,28 +14,38 @@ import schoolImg from "../../assets/eskul.jpg";
 
 export default function LandingSection() {
   return (
-    <LandingContainer>
+    <LandingContainer id="beranda">
+
       <Left>
-        <Tag>SELAMAT DATANG DI PORTAL RESMI</Tag>
 
         <Title>
-          Wujudkan Bakatmu di <span>SMPN 4 Gunung Putri</span>
+          Kembangkan Potensi, <br />
+          <span>Raih Prestasi!</span>
         </Title>
 
         <Desc>
-          Wadah pengembangan bakat, minat, dan kreativitas siswa untuk
-          mewujudkan generasi unggul, berprestasi, dan berkarakter mulia.
+          SMP Negeri 4 Gunung Putri menyediakan berbagai kegiatan
+          ekstrakurikuler yang dirancang untuk mengembangkan potensi
+          siswa dan membantu mereka meraih prestasi dalam berbagai bidang.
         </Desc>
 
         <ButtonGroup>
-          <PrimaryBtn>Jelajahi Eskul</PrimaryBtn>
-          <SecondaryBtn>Lihat Profil Sekolah</SecondaryBtn>
+
+          <PrimaryBtn as="a" href="#eskul">
+            🎯 Jelajahi Eskul
+          </PrimaryBtn>
+
         </ButtonGroup>
+
       </Left>
 
       <Right>
-        <img src={schoolImg} alt="Sekolah" />
+        <img
+          src={schoolImg}
+          alt="Sekolah"
+        />
       </Right>
+
     </LandingContainer>
   );
 }

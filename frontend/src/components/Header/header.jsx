@@ -1,33 +1,78 @@
-// src/components/Header.jsx
+import { useState } from "react";
+
+import logosmp from "../../assets/logosmp.png";
+
 import {
   HeaderContainer,
   Logo,
-  LogoIcon,
+  LogoImage,
   LogoText,
   Nav,
   NavItem,
   ContactButton,
+  MenuButton,
 } from "./headerStyled";
 
 export default function Header() {
+
+  const [open, setOpen] = useState(false);
+
   return (
     <HeaderContainer>
+
+      {/* LOGO */}
       <Logo>
-        <LogoIcon />
+
+        <LogoImage
+          src={logosmp}
+          alt="Logo SMP"
+        />
+
         <LogoText>
+
           <h3>SMPN 4 Gunung Putri</h3>
-          <p>Sistem Informasi Eskul</p>
+
+          <p>Sistem Informasi Ekstrakurikuler</p>
+
         </LogoText>
+
       </Logo>
 
-      <Nav>
-        <NavItem>Beranda</NavItem>
-        <NavItem>Tentang Kami</NavItem>
-        <NavItem>Ekstrakurikuler</NavItem>
-        <NavItem>Kontak</NavItem>
+      {/* HAMBURGER */}
+      <MenuButton
+        onClick={() => setOpen(!open)}
+      >
+        ☰
+      </MenuButton>
+
+      {/* NAVBAR */}
+      <Nav open={open}>
+
+        <NavItem href="/#beranda">
+          Beranda
+        </NavItem>
+
+        <NavItem href="/#tentang">
+          Tentang Kami
+        </NavItem>
+
+        <NavItem href="/#eskul">
+          Ekstrakurikuler
+        </NavItem>
+
+        <NavItem href="/#kontak">
+          Kontak
+        </NavItem>
+
       </Nav>
 
-      <ContactButton>Hubungi Kami</ContactButton>
+      {/* BUTTON */}
+      <ContactButton
+        href="/#kontak"
+      >
+        Hubungi Kami
+      </ContactButton>
+
     </HeaderContainer>
   );
 }

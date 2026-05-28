@@ -1,20 +1,15 @@
-import Container from "../components/Container";
+import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/header";
-import LandingSection from "../components/Landing/LandingSection";
-import AboutSection from "../components/AboutSection/AboutSection";
-import CTASection from "../components/CTASection/CTASection";
 
-function Layout({ children }) {
-    return (
-        <>
-            <Header />
-            <LandingSection />
-            <AboutSection />
-            <CTASection />    
-            <Footer />
-        </>
-    );
+function Layout() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
 
 export default Layout;

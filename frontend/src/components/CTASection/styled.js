@@ -3,67 +3,146 @@ import styled from "styled-components";
 export const Container = styled.section`
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
-  background-color: #f5f5f5;
+  align-items: center;
+
+  width: 100%;
+  
+  min-height: 50vh; 
+
+  padding: 20px 16px;
+  background: #f4f8ff;
 `;
 
 export const Content = styled.div`
-  background: linear-gradient(135deg, #2f80ed, #1c5ecb);
-  border-radius: 16px;
-  padding: 50px 30px;
-  max-width: 900px;
   width: 100%;
-  text-align: center;
+  max-width: 650px;
+
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+
   color: white;
+
+  border-radius: 22px;
+
+  padding: 35px 25px;
+
+  text-align: center;
+
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.12);
+
+  margin: auto;
+
+  @media (max-width: 480px) {
+    border-radius: 18px;
+
+    padding: 28px 20px;
+  }
 `;
 
 export const Title = styled.h2`
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 34px);
+
   font-weight: 700;
-  margin-bottom: 15px;
+
+  margin-bottom: 16px;
+
+  color: white;
 `;
 
 export const Description = styled.p`
-  font-size: 14px;
-  max-width: 600px;
-  margin: 0 auto 30px auto;
-  line-height: 1.6;
-  color: #e0e0e0;
+  font-size: clamp(13px, 2vw, 15px);
+
+  max-width: 560px;
+
+  margin: 0 auto 30px;
+
+  line-height: 1.7;
+
+  color: #e5edff;
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
+
   justify-content: center;
-  gap: 15px;
+  align-items: center;
+
+  gap: 12px;
+
   flex-wrap: wrap;
-`;
 
-export const PrimaryButton = styled.button`
-  background-color: white;
-  color: #2f80ed;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+  @media (max-width: 480px) {
+    flex-direction: column;
 
-  &:hover {
-    background-color: #f0f0f0;
+    align-items: center;
   }
 `;
 
-export const SecondaryButton = styled.button`
-  background: transparent;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: 1px solid white;
-  font-weight: 500;
-  cursor: pointer;
+export const PrimaryButton = styled.a`
+  background: white;
+
+  color: #2563eb;
+
+  text-decoration: none;
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+
   transition: 0.3s;
 
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
+
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    text-align: center;
+  }
+`;
+
+export const SecondaryButton = styled.a`
+  background: transparent;
+
+  color: white;
+
+  text-decoration: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.3s;
+
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    text-align: center;
   }
 `;

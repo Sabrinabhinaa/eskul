@@ -1,5 +1,23 @@
 .Container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* bikin padding lebih fleksibel */
+  padding: 0 clamp(12px, 3vw, 20px);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .Container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .Container {
+    padding: 0 12px;
+  }
 }

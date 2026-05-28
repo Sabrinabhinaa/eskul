@@ -1,14 +1,18 @@
-import React from "react";
-import Hero from "../components/Hero/Hero";
-import Movies from "../components/Movies/Movies";
+import LandingSection from "../components/Landing/LandingSection";
+import AboutSection from "../components/AboutSection/AboutSection";
+import CTASection from "../components/CTASection/CTASection";
+import EskulSection from "../components/Eskul/EskulSection";
 
-function Home({ movies }) {
-    return (
-        <>
-            <Hero />
-            <Movies movies={movies} />
-        </>
-    );
+
+function Home() {
+  return (
+    <>
+      <LandingSection id="beranda" />
+      <AboutSection id="tentang" />
+      <EskulSection id="eskul" />
+      <CTASection id="kontak" />
+    </>
+  );
 }
 
 export default Home;
