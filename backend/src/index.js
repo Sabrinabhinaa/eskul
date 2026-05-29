@@ -1,18 +1,14 @@
 const express = require("express");
-
 const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
 
-const eskuls = require("./data/eskuls");
-
-// API
-app.get("/eskuls", (req, res) => {
-  res.json(eskuls);
+app.get("/", (req, res) => {
+  res.send("Backend jalan");
 });
 
-app.listen(5000, () => {
-  console.log("🚀 Server running on http://localhost:5000");
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
