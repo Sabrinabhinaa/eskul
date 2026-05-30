@@ -1,4 +1,5 @@
 // EskulSection.jsx
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -17,21 +18,27 @@ import {
 export default function EskulSection() {
 
   const [eskuls, setEskuls] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
+  setLoading(true);
 
-   fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
+  fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
+    .then((res) => res.json())
+    .then((data) => {
+      const eskulData = data.data || data;
+      setEskuls(eskulData);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+}, []);
 
-      .then((res) => res.json())
-
-      .then((data) => {
-        console.log(data);
-        setEskuls(data);
-      })
-
-      .catch((err) => console.log(err));
-
-  }, []);
+if (loading) {
+  return <div>Loading...</div>;
+}
 
   return (
     <Container id="eskul">
@@ -55,11 +62,10 @@ export default function EskulSection() {
           >
 
             <Card>
-
-              <CardImage
-                src={item.image}
-                alt={item.title}
-              />
+          <CardImage
+  src={`${import.meta.env.VITE_API_URL}${item.image}`}
+  alt={item.title}
+/>
 
               <CardBody>
 

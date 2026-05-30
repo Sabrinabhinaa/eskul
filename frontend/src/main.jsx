@@ -6,7 +6,12 @@ import "./index.css";
 const container = document.getElementById("root");
 
 createRoot(container).render(
-  <BrowserRouter>
+  <BrowserRouter
+    future={{
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    }}
+  >
     <App />
   </BrowserRouter>
 );
