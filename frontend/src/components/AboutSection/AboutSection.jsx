@@ -97,8 +97,8 @@ function AboutSection() {
             </SectionTitle>
 
             <SchoolText>
-              Menjadi sekolah unggul yang berkarakter,
-              kreatif, dan berprestasi.
+              Menciptakan generasi yang memiliki kecerdasan 
+              adversitas dengan karakter yang sesuai profil lulusan.
             </SchoolText>
 
             <SectionTitle>
@@ -106,11 +106,14 @@ function AboutSection() {
             </SectionTitle>
 
             <List>
-              <li>Meningkatkan kualitas pendidikan.</li>
-              <li>Mengembangkan bakat siswa.</li>
-              <li>Menanamkan disiplin dan tanggung jawab.</li>
-              <li>Menciptakan lingkungan belajar nyaman.</li>
-            </List>
+              <li>Membantu peserta didik mengenali bakat dan potensi diri.</li>
+              <li>Mengoptimalkan potensi peserta didik sesuai minat dan bakatnya.</li>
+              <li>Memberikan literasi yang berkaitan dengan perkembangan bumi kepada 
+                peserta didik setiap sebelum memulai pembelajaran.</li>
+              <li>Mewujudkan perilaku kompetensi global yang sesuai dengan nilai-nilai Pancasila.</li>
+              <li>Membentuk pribadi peserta didik dengan kuriositas yang tinggi dalam meningkatkan 
+                kreativitas pada bidang pengetahuan dan teknologi.</li>
+            </List> 
 
           </VisiMisiBox>
 

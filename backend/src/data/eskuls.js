@@ -14,6 +14,7 @@ const eskuls = [
       "/images/pramuka2.jpg",
       "/images/pramuka3.jpg",
       "/images/pramuka4.jpg",
+      "/images/pramuka5.jpg",
     ],
 
     video: "/videos/pramuka.mp4",
@@ -64,9 +65,14 @@ const eskuls = [
       "/images/tari2.jpg",
       "/images/tari3.jpg",
       "/images/tari4.jpg",
+      "/images/tari5.jpg",
+      "/images/tari6.jpg",
     ],
 
-     video: "/videos/tari.mp4",
+     video: [
+      "/videos/tari.mp4",
+      "/videos/tari1.mp4",
+     ],
      pembina: "Puja Okzalia, S.Pd.",
      category: "SENI",
   },
@@ -132,9 +138,14 @@ const eskuls = [
       "/images/futsal2.jpg",
       "/images/futsal3.jpg",
       "/images/futsal4.jpg",
+      "/images/futsal5.jpg",
+      "/images/futsal6.jpg",
     ],
 
-    video: "/videos/futsal.mp4",
+    video: [
+     "/videos/futsal.mp4",
+    "/videos/futsal1.mp4",  
+    ],
     pembina: "M. Fudhail Al Ubad, S.Pd.",
     category: "OLAHRAGA",
   },
@@ -154,6 +165,7 @@ const eskuls = [
       "/images/voli2.jpg",
       "/images/voli3.jpg",
       "/images/voli4.jpg",
+      "/images/voli5.jpg",                            
     ],
 
     video: "/videos/voli.mp4",

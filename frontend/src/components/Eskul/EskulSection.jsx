@@ -20,7 +20,7 @@ export default function EskulSection() {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/eskuls")
+   fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
 
       .then((res) => res.json())
 
