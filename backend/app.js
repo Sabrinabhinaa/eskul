@@ -16,7 +16,7 @@ app.use(
 // Folder gambar
 app.use(
   "/images",
-  express.static(path.join(__dirname, "public/images"))
+  express.static(path.join(__dirname, "publik/images"))
 );
 
 app.get("/", (req, res) => {
