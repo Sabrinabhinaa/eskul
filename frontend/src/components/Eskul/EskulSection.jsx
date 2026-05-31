@@ -22,14 +22,11 @@ export default function EskulSection() {
 
     fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
 
-      .then((res) => {
-
-        if (!res.ok) {
-          throw new Error("Gagal mengambil data");
-        }
-
-        return res.json();
-      })
+      .then((data) => {
+      console.log("DATA ESKUL:", data);
+      setEskuls(data);
+      setLoading(false);
+    })
 
       .then((data) => {
         setEskuls(data);
