@@ -8,7 +8,8 @@ const DetailEskul = () => {
   const [eskul, setEskul] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  const BASE_URL = "https://eskul-y2xk.vercel.app";
+const BASE_URL =
+"https://eskul-y2xk-nldlobi5t-sabrinabhinaas-projects.vercel.app";
 
  useEffect(() => {
   window.scrollTo(0, 0);
