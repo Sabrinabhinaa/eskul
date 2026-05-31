@@ -17,18 +17,20 @@ export default function EskulSection() {
   const [eskuls, setEskuls] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
-      .then((res) => res.json())
-      .then((data) => {
-        setEskuls(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+  const API_URL = import.meta.env.VITE_API_URL;
+
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
+    .then((res) => res.json())
+    .then((data) => {
+      setEskuls(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Fetch error:", err);
+      setLoading(false);
+    });
+}, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -51,9 +53,9 @@ export default function EskulSection() {
           >
             <Card>
               <CardImage
-                src={`${import.meta.env.VITE_API_URL}${item.image}`}
-                alt={item.title}
-              />
+  src={item.image}
+  alt={item.title}
+/>
 
               <CardBody>
                 <Badge>{item.category}</Badge>
