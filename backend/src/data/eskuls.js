@@ -7,7 +7,7 @@ const eskuls = [
     description:
       "Ekstrakurikuler Pramuka di SMPN 4 Gunung Putri bertujuan membentuk karakter siswa yang disiplin, mandiri, bertanggung jawab, dan memiliki jiwa kepemimpinan melalui kegiatan kepanduan, kerja sama tim, dan latihan rutin yang edukatif.",
 
-    image: "/images/Pramuka.jpg",
+    image: "/images/pramuka.jpg",
 
     gallery: [
       "/images/pramuka1.jpg",
@@ -17,7 +17,7 @@ const eskuls = [
       "/images/pramuka5.jpg",
     ],
 
-    video: "/videos/pramuka.mp4",
+    video: ["/videos/pramuka.mp4"],
 
     pembinaPutra: "Yusup Ansori, S.Pd.",
     pembinaPutri: "Putri Oktarina, S.Pd.",
@@ -43,7 +43,7 @@ const eskuls = [
       "/images/pmr4.jpg",
     ],
 
-    video: "/videos/pmr.mp4",
+    video: ["/videos/pmr.mp4"],
 
     pembina: "Dela Rizkia, S.Pd.",
 
@@ -94,7 +94,7 @@ const eskuls = [
       "/images/padus4.jpg",
     ],
 
-    video: "/videos/padus.mp4",
+    video: ["/videos/padus.mp4"],
 
     pembina: "Andini Putri Nadira",
     category: "MUSIK",
@@ -117,7 +117,7 @@ const eskuls = [
       "/images/marching4.jpg",
     ],
 
-     video: "/videos/marchingband.mp4",
+     video: ["/videos/marchingband.mp4"],
      pembina: "Findya Nurfajrin, S.Pd.",
 
     category: "MUSIK",
@@ -158,7 +158,7 @@ const eskuls = [
     description:
       "Melatih kemampuan bermain bola voli, kerja sama tim, dan sportivitas siswa.",
 
-    image: "/images/volii.jpg",
+    image: "/images/voli.jpg",
 
     gallery: [
       "/images/voli1.jpg",
@@ -168,7 +168,7 @@ const eskuls = [
       "/images/voli5.jpg",                            
     ],
 
-    video: "/videos/voli.mp4",
+    video: ["/videos/voli.mp4"],
     pembina: "Karina Nur Azzahra, S.Pd.",
     category: "OLAHRAGA",
   },
@@ -190,7 +190,7 @@ const eskuls = [
       "/images/bulutangkis4.jpg",
     ],
 
-    video: "/videos/bulutangkis.mp4",
+    video: ["/videos/bulutangkis.mp4"],
     pembina: "Renca Adhi Nugraha, S.Pd.",
     category: "OLAHRAGA",
   },
@@ -212,7 +212,7 @@ const eskuls = [
       "/images/silat4.jpg",
     ],
 
-    video: "/videos/pencaksilat.mp4",
+    video: ["/videos/pencaksilat.mp4"],
     pembina: "Muhamad Yoga Kautsar, S.Pd.",
     category: "SENI BELA DIRI",
   },

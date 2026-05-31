@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const eskuls = require("./data/eskuls");
 
@@ -12,6 +13,8 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "../public")));
+
 app.get("/", (req, res) => {
   res.send("Backend jalan");
 });
@@ -21,7 +24,6 @@ app.get("/eskuls", (req, res) => {
 });
 
 app.get("/eskuls/:id", (req, res) => {
-
   const id = parseInt(req.params.id);
 
   const eskul = eskuls.find((item) => item.id === id);
