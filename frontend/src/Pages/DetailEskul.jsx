@@ -16,17 +16,17 @@ const DetailEskul = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/eskuls")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedEskul = data.find(
-          (item) => item.id === Number(id)
-        );
+  fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
+    .then((res) => res.json())
+    .then((data) => {
+      const selectedEskul = data.find(
+        (item) => item.id === Number(id)
+      );
 
-        setEskul(selectedEskul);
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
+      setEskul(selectedEskul);
+    })
+    .catch((err) => console.log(err));
+}, [id]);
 
   if (!eskul) {
     return <h1>Loading...</h1>;
