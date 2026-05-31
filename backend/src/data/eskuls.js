@@ -17,7 +17,6 @@ const eskuls = [
       "/images/pramuka5.jpg",
     ],
 
-    video: ["/videos/pramuka.mp4"],
 
     pembinaPutra: "Yusup Ansori, S.Pd.",
     pembinaPutri: "Putri Oktarina, S.Pd.",

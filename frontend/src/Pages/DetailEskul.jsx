@@ -1,27 +1,42 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { House, ChevronRight, Users, Calendar, Award } from "lucide-react";
+import { Users, Calendar, Award } from "lucide-react";
 
 const DetailEskul = () => {
   const { id } = useParams();
 
   const [eskul, setEskul] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedMedia, setSelectedMedia] = useState(null);
 
-  useEffect(() => {
-    fetch("/eskuls.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedEskul = data.find(
-          (item) => item.id === Number(id)
-        );
+  const BASE_URL = "https://eskul-y2xk.vercel.app";
 
-        setEskul(selectedEskul || null);
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
+ useEffect(() => {
+  window.scrollTo(0, 0);
+
+  fetch(`${BASE_URL}/eskuls`)
+    .then((res) => res.json())
+    .then((data) => {
+      const selectedEskul = data.find(
+        (item) => item.id === Number(id)
+      );
+
+      setEskul(selectedEskul || null);
+    })
+    .catch((err) => console.log(err));
+}, [id]);
 
   if (!eskul) return <h1>Loading...</h1>;
+
+  const media = [
+    ...(eskul.gallery || []).map((item) => ({
+      type: "image",
+      src: item,
+    })),
+    ...(eskul.video || []).map((item) => ({
+      type: "video",
+      src: item,
+    })),
+  ];
 
   return (
     <div
@@ -32,103 +47,99 @@ const DetailEskul = () => {
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
-        {/* BREADCRUMB */}
+        {/* HERO */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            marginBottom: "30px",
-            flexWrap: "wrap",
-            fontSize: "15px",
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: "#2563EB",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <House size={18} />
-          </Link>
-
-          <ChevronRight size={16} color="#94A3B8" />
-
-          <span
-            style={{
-              color: "#2563EB",
-              fontWeight: "700",
-            }}
-          >
-            {eskul.title}
-          </span>
-        </div>
-
-        {/* HEADER */}
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "28px",
-            overflow: "hidden",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+            position: "relative",
             marginBottom: "40px",
           }}
         >
-          <img
-            src={eskul.image}
-            alt={eskul.title}
-            style={{
-              width: "100%",
-              height: "420px",
-              objectFit: "cover",
-            }}
-          />
+          <Link
+          to="/"
+          style={{
+            position: "absolute",
+            top: "20px",
+            left: "20px",
+            zIndex: 10,
+            background: "#fff",
+            padding: "10px 16px",
+            borderRadius: "999px",
+            textDecoration: "none",
+            color: "#111827",
+            fontWeight: "600",
+          }}
+        >
+          ← Kembali
+        </Link>
 
-          <div style={{ padding: "35px" }}>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "40px",
+              left: "40px",
+              zIndex: 10,
+              color: "#fff",
+            }}
+          >
             <span
               style={{
-                background: "#DBEAFE",
-                color: "#1D4ED8",
-                padding: "8px 18px",
+                background: "#2563EB",
+                padding: "8px 16px",
                 borderRadius: "999px",
                 fontSize: "14px",
-                fontWeight: "600",
               }}
             >
-              {eskul.category}
+              EKSTRAKURIKULER
             </span>
 
             <h1
               style={{
-                marginTop: "20px",
-                fontSize: "42px",
+                fontSize: "56px",
+                marginTop: "15px",
               }}
             >
               {eskul.title}
             </h1>
-
-            <p
-              style={{
-                marginTop: "20px",
-                fontSize: "18px",
-                lineHeight: "1.9",
-                color: "#475569",
-                textAlign: "justify",
-              }}
-            >
-              {eskul.description}
-            </p>
           </div>
+
+          <img
+            src={`${BASE_URL}${eskul.image}`}
+            alt={eskul.title}
+            style={{
+              width: "100%",
+              height: "600px",
+              objectFit: "cover",
+              borderRadius: "30px",
+            }}
+          />
+        </div>
+
+        {/* DESKRIPSI */}
+        <div
+          style={{
+            background: "#fff",
+            padding: "35px",
+            borderRadius: "28px",
+            marginBottom: "40px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "18px",
+              lineHeight: "1.9",
+              color: "#475569",
+            }}
+          >
+            {eskul.description}
+          </p>
         </div>
 
         {/* INFO */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(250px, 1fr))",
             gap: "20px",
             marginBottom: "40px",
           }}
@@ -148,7 +159,8 @@ const DetailEskul = () => {
                 eskul.pembina
               ) : (
                 <>
-                  Pembina Putra: {eskul.pembinaPutra || "-"} <br />
+                  Pembina Putra: {eskul.pembinaPutra || "-"}
+                  <br />
                   Pembina Putri: {eskul.pembinaPutri || "-"}
                 </>
               )}
@@ -200,70 +212,138 @@ const DetailEskul = () => {
               gap: "18px",
             }}
           >
-            {/* FOTO */}
-            {eskul.gallery?.map((foto, index) => (
+            {media.map((item, index) => (
               <div
                 key={index}
-                onClick={() => setSelectedImage(index)}
+                onClick={() => setSelectedMedia(index)}
                 style={{ cursor: "pointer" }}
               >
-                <img
-                  src={foto}
-                  alt={`gallery-${index}`}
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    objectFit: "cover",
-                    borderRadius: "18px",
-                  }}
-                />
-              </div>
-            ))}
-
-            {/* VIDEO */}
-            {eskul.video?.map((vid, index) => (
-              <div key={index}>
-                <video
-                  controls
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    objectFit: "cover",
-                    borderRadius: "18px",
-                  }}
-                >
-                  <source src={vid} type="video/mp4" />
-                </video>
+                {item.type === "image" ? (
+                  <img
+                    src={`${BASE_URL}${item.src}`}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "180px",
+                      objectFit: "cover",
+                      borderRadius: "18px",
+                    }}
+                  />
+                ) : (
+                  <video
+                    style={{
+                      width: "100%",
+                      height: "180px",
+                      objectFit: "cover",
+                      borderRadius: "18px",
+                    }}
+                  >
+                    <source
+                      src={`${BASE_URL}${item.src}`}
+                      type="video/mp4"
+                    />
+                  </video>
+                )}
               </div>
             ))}
           </div>
         </div>
 
         {/* MODAL */}
-        {selectedImage !== null && (
+        {selectedMedia !== null && (
           <div
-            onClick={() => setSelectedImage(null)}
             style={{
               position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.9)",
+              inset: 0,
+              background: "rgba(0,0,0,0.95)",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               zIndex: 9999,
             }}
           >
-            <img
-              src={eskul.gallery[selectedImage]}
-              alt="preview"
+            <button
+              onClick={() =>
+                setSelectedMedia(
+                  selectedMedia === 0
+                    ? media.length - 1
+                    : selectedMedia - 1
+                )
+              }
               style={{
-                maxWidth: "90%",
-                maxHeight: "90%",
+                position: "absolute",
+                left: "20px",
+                fontSize: "40px",
+                background: "transparent",
+                border: "none",
+                color: "#fff",
+                cursor: "pointer",
               }}
-            />
+            >
+              ❮
+            </button>
+
+            {media[selectedMedia].type === "image" ? (
+              <img
+                src={`${BASE_URL}${media[selectedMedia].src}`}
+                alt=""
+                style={{
+                  maxWidth: "90%",
+                  maxHeight: "90%",
+                }}
+              />
+            ) : (
+              <video
+                controls
+                autoPlay
+                style={{
+                  maxWidth: "90%",
+                  maxHeight: "90%",
+                }}
+              >
+                <source
+                  src={`${BASE_URL}${media[selectedMedia].src}`}
+                  type="video/mp4"
+                />
+              </video>
+            )}
+
+            <button
+              onClick={() =>
+                setSelectedMedia(
+                  selectedMedia === media.length - 1
+                    ? 0
+                    : selectedMedia + 1
+                )
+              }
+              style={{
+                position: "absolute",
+                right: "20px",
+                fontSize: "40px",
+                background: "transparent",
+                border: "none",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              ❯
+            </button>
+
+            <button
+              onClick={() => setSelectedMedia(null)}
+              style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                fontSize: "30px",
+                background: "transparent",
+                border: "none",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              ✕
+            </button>
           </div>
         )}
       </div>
