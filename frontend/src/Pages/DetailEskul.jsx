@@ -3,37 +3,69 @@ import { useEffect, useState } from "react";
 import { Users, Calendar, Award } from "lucide-react";
 
 const DetailEskul = () => {
+
   const { id } = useParams();
 
   const [eskul, setEskul] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-const BASE_URL =
-"https://eskul-y2xk-nldlobi5t-sabrinabhinaas-projects.vercel.app";
+  const BASE_URL =
+    "https://eskul-y2xk.vercel.app";
 
- useEffect(() => {
-  window.scrollTo(0, 0);
+  useEffect(() => {
 
-  fetch(`${BASE_URL}/eskuls`)
-    .then((res) => res.json())
-    .then((data) => {
-      const selectedEskul = data.find(
-        (item) => item.id === Number(id)
-      );
+    window.scrollTo(0, 0);
 
-      setEskul(selectedEskul || null);
-    })
-    .catch((err) => console.log(err));
-}, [id]);
+    fetch(`${BASE_URL}/eskuls/${id}`)
 
-  if (!eskul) return <h1>Loading...</h1>;
+      .then((res) => {
+
+        if (!res.ok) {
+          throw new Error("Data tidak ditemukan");
+        }
+
+        return res.json();
+      })
+
+      .then((data) => {
+        setEskul(data);
+        setLoading(false);
+      })
+
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+
+  }, [id]);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (!eskul) {
+    return <h1>Data tidak ditemukan</h1>;
+  }
+
+  // SAFE ARRAY
+  const galleryMedia = Array.isArray(eskul.gallery)
+    ? eskul.gallery
+    : [];
+
+  const videoMedia = Array.isArray(eskul.video)
+    ? eskul.video
+    : eskul.video
+    ? [eskul.video]
+    : [];
 
   const media = [
-    ...(eskul.gallery || []).map((item) => ({
+    ...galleryMedia.map((item) => ({
       type: "image",
       src: item,
     })),
-    ...(eskul.video || []).map((item) => ({
+
+    ...videoMedia.map((item) => ({
       type: "video",
       src: item,
     })),
@@ -47,7 +79,13 @@ const BASE_URL =
         padding: "40px 20px",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+
         {/* HERO */}
         <div
           style={{
@@ -55,23 +93,24 @@ const BASE_URL =
             marginBottom: "40px",
           }}
         >
+
           <Link
-          to="/"
-          style={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            zIndex: 10,
-            background: "#fff",
-            padding: "10px 16px",
-            borderRadius: "999px",
-            textDecoration: "none",
-            color: "#111827",
-            fontWeight: "600",
-          }}
-        >
-          ← Kembali
-        </Link>
+            to="/"
+            style={{
+              position: "absolute",
+              top: "20px",
+              left: "20px",
+              zIndex: 10,
+              background: "#fff",
+              padding: "10px 16px",
+              borderRadius: "999px",
+              textDecoration: "none",
+              color: "#111827",
+              fontWeight: "600",
+            }}
+          >
+            ← Kembali
+          </Link>
 
           <div
             style={{
@@ -82,6 +121,7 @@ const BASE_URL =
               color: "#fff",
             }}
           >
+
             <span
               style={{
                 background: "#2563EB",
@@ -101,6 +141,7 @@ const BASE_URL =
             >
               {eskul.title}
             </h1>
+
           </div>
 
           <img
@@ -113,6 +154,7 @@ const BASE_URL =
               borderRadius: "30px",
             }}
           />
+
         </div>
 
         {/* DESKRIPSI */}
@@ -124,6 +166,7 @@ const BASE_URL =
             marginBottom: "40px",
           }}
         >
+
           <p
             style={{
               fontSize: "18px",
@@ -133,6 +176,7 @@ const BASE_URL =
           >
             {eskul.description}
           </p>
+
         </div>
 
         {/* INFO */}
@@ -145,6 +189,8 @@ const BASE_URL =
             marginBottom: "40px",
           }}
         >
+
+          {/* PEMBINA */}
           <div
             style={{
               background: "#fff",
@@ -152,22 +198,39 @@ const BASE_URL =
               borderRadius: "24px",
             }}
           >
-            <Users size={35} color="#2563EB" />
+
+            <Users
+              size={35}
+              color="#2563EB"
+            />
+
             <h3>Pembina</h3>
 
-            <p style={{ color: "#64748B" }}>
+            <p
+              style={{
+                color: "#64748B",
+              }}
+            >
               {eskul.pembina ? (
                 eskul.pembina
               ) : (
                 <>
-                  Pembina Putra: {eskul.pembinaPutra || "-"}
+                  Pembina Putra:
+                  {" "}
+                  {eskul.pembinaPutra || "-"}
+
                   <br />
-                  Pembina Putri: {eskul.pembinaPutri || "-"}
+
+                  Pembina Putri:
+                  {" "}
+                  {eskul.pembinaPutri || "-"}
                 </>
               )}
             </p>
+
           </div>
 
+          {/* JADWAL */}
           <div
             style={{
               background: "#fff",
@@ -175,11 +238,21 @@ const BASE_URL =
               borderRadius: "24px",
             }}
           >
-            <Calendar size={35} color="#2563EB" />
+
+            <Calendar
+              size={35}
+              color="#2563EB"
+            />
+
             <h3>Jadwal</h3>
-            <p>Setiap Jumat & Sabtu</p>
+
+            <p>
+              Setiap Jumat & Sabtu
+            </p>
+
           </div>
 
+          {/* PRESTASI */}
           <div
             style={{
               background: "#fff",
@@ -187,10 +260,20 @@ const BASE_URL =
               borderRadius: "24px",
             }}
           >
-            <Award size={35} color="#2563EB" />
+
+            <Award
+              size={35}
+              color="#2563EB"
+            />
+
             <h3>Prestasi</h3>
-            <p>Aktif mengikuti lomba & kegiatan sekolah</p>
+
+            <p>
+              Aktif mengikuti lomba & kegiatan sekolah
+            </p>
+
           </div>
+
         </div>
 
         {/* GALERI */}
@@ -201,7 +284,12 @@ const BASE_URL =
             borderRadius: "28px",
           }}
         >
-          <h2 style={{ marginBottom: "25px" }}>
+
+          <h2
+            style={{
+              marginBottom: "25px",
+            }}
+          >
             📸 Galeri Kegiatan
           </h2>
 
@@ -213,13 +301,19 @@ const BASE_URL =
               gap: "18px",
             }}
           >
+
             {media.map((item, index) => (
+
               <div
                 key={index}
                 onClick={() => setSelectedMedia(index)}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                }}
               >
+
                 {item.type === "image" ? (
+
                   <img
                     src={`${BASE_URL}${item.src}`}
                     alt=""
@@ -230,7 +324,9 @@ const BASE_URL =
                       borderRadius: "18px",
                     }}
                   />
+
                 ) : (
+
                   <video
                     style={{
                       width: "100%",
@@ -244,14 +340,20 @@ const BASE_URL =
                       type="video/mp4"
                     />
                   </video>
+
                 )}
+
               </div>
+
             ))}
+
           </div>
+
         </div>
 
         {/* MODAL */}
         {selectedMedia !== null && (
+
           <div
             style={{
               position: "fixed",
@@ -263,6 +365,8 @@ const BASE_URL =
               zIndex: 9999,
             }}
           >
+
+            {/* PREV */}
             <button
               onClick={() =>
                 setSelectedMedia(
@@ -284,7 +388,9 @@ const BASE_URL =
               ❮
             </button>
 
+            {/* MEDIA */}
             {media[selectedMedia].type === "image" ? (
+
               <img
                 src={`${BASE_URL}${media[selectedMedia].src}`}
                 alt=""
@@ -293,7 +399,9 @@ const BASE_URL =
                   maxHeight: "90%",
                 }}
               />
+
             ) : (
+
               <video
                 controls
                 autoPlay
@@ -307,8 +415,10 @@ const BASE_URL =
                   type="video/mp4"
                 />
               </video>
+
             )}
 
+            {/* NEXT */}
             <button
               onClick={() =>
                 setSelectedMedia(
@@ -330,6 +440,7 @@ const BASE_URL =
               ❯
             </button>
 
+            {/* CLOSE */}
             <button
               onClick={() => setSelectedMedia(null)}
               style={{
@@ -345,8 +456,11 @@ const BASE_URL =
             >
               ✕
             </button>
+
           </div>
+
         )}
+
       </div>
     </div>
   );
