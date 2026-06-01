@@ -11,7 +11,7 @@ const DetailEskul = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   const BASE_URL =
-    "https://eskul-y2xk.vercel.app";
+    import.meta.env.VITE_API_URL;
 
   useEffect(() => {
 
@@ -29,13 +29,17 @@ const DetailEskul = () => {
       })
 
       .then((data) => {
+
         setEskul(data);
         setLoading(false);
+
       })
 
       .catch((err) => {
+
         console.log(err);
         setLoading(false);
+
       });
 
   }, [id]);
@@ -49,16 +53,17 @@ const DetailEskul = () => {
   }
 
   // SAFE ARRAY
-  const galleryMedia = Array.isArray(eskul.gallery)
+  const galleryMedia = Array.isArray(eskul?.gallery)
     ? eskul.gallery
     : [];
 
-  const videoMedia = Array.isArray(eskul.video)
+  const videoMedia = Array.isArray(eskul?.video)
     ? eskul.video
-    : eskul.video
+    : eskul?.video
     ? [eskul.video]
     : [];
 
+  // COMBINE MEDIA
   const media = [
     ...galleryMedia.map((item) => ({
       type: "image",
@@ -94,6 +99,7 @@ const DetailEskul = () => {
           }}
         >
 
+          {/* BACK BUTTON */}
           <Link
             to="/"
             style={{
@@ -112,6 +118,7 @@ const DetailEskul = () => {
             ← Kembali
           </Link>
 
+          {/* TITLE */}
           <div
             style={{
               position: "absolute",
@@ -144,6 +151,7 @@ const DetailEskul = () => {
 
           </div>
 
+          {/* HERO IMAGE */}
           <img
             src={`${BASE_URL}${eskul.image}`}
             alt={eskul.title}
@@ -157,7 +165,7 @@ const DetailEskul = () => {
 
         </div>
 
-        {/* DESKRIPSI */}
+        {/* DESCRIPTION */}
         <div
           style={{
             background: "#fff",
@@ -179,7 +187,7 @@ const DetailEskul = () => {
 
         </div>
 
-        {/* INFO */}
+        {/* INFO CARD */}
         <div
           style={{
             display: "grid",
@@ -209,6 +217,7 @@ const DetailEskul = () => {
             <p
               style={{
                 color: "#64748B",
+                lineHeight: "1.7",
               }}
             >
               {eskul.pembina ? (
@@ -302,7 +311,7 @@ const DetailEskul = () => {
             }}
           >
 
-            {media.map((item, index) => (
+            {media?.map((item, index) => (
 
               <div
                 key={index}
@@ -352,7 +361,8 @@ const DetailEskul = () => {
         </div>
 
         {/* MODAL */}
-        {selectedMedia !== null && (
+        {selectedMedia !== null &&
+          media?.[selectedMedia] && (
 
           <div
             style={{
@@ -389,7 +399,7 @@ const DetailEskul = () => {
             </button>
 
             {/* MEDIA */}
-            {media[selectedMedia].type === "image" ? (
+            {media?.[selectedMedia]?.type === "image" ? (
 
               <img
                 src={`${BASE_URL}${media[selectedMedia].src}`}

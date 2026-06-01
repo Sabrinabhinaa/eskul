@@ -14,30 +14,25 @@ import {
 } from "./eskulStyled";
 
 export default function EskulSection() {
-
   const [eskuls, setEskuls] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
-    fetch(`${import.meta.env.VITE_API_URL}/eskuls`)
-
+    fetch("https://eskul-y2xk.vercel.app/eskuls")
+      .then((res) => res.json())
       .then((data) => {
-      console.log("DATA ESKUL:", data);
-      setEskuls(data);
-      setLoading(false);
-    })
+        console.log("DATA ESKUL:", data);
 
-      .then((data) => {
-        setEskuls(data);
+        // pastikan data array
+        setEskuls(Array.isArray(data) ? data : []);
+
         setLoading(false);
       })
-
       .catch((err) => {
-        console.error(err);
+        console.error("Fetch error:", err);
+        setEskuls([]);
         setLoading(false);
       });
-
   }, []);
 
   if (loading) {
@@ -46,54 +41,30 @@ export default function EskulSection() {
 
   return (
     <Container id="eskul">
+      <Title>Pilihan Ekstrakurikuler</Title>
 
-      <Title>
-        Pilihan Ekstrakurikuler
-      </Title>
-
-      <Subtitle>
-        Temukan komunitas sesuai minat kamu
-      </Subtitle>
+      <Subtitle>Temukan komunitas sesuai minat kamu</Subtitle>
 
       <CardWrapper>
+        {Array.isArray(eskuls) &&
+          eskuls.map((item) => (
+            <Link
+              key={item.id}
+              to={`/eskul/${item.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Card>
+                <CardImage src={item.image} alt={item.title} />
 
-        {eskuls.map((item) => (
+                <CardBody>
+                  <Badge>{item.category}</Badge>
 
-          <Link
-            key={item.id}
-            to={`/eskul/${item.id}`}
-            style={{
-              textDecoration: "none",
-            }}
-          >
-
-            <Card>
-
-              <CardImage
-                src={item.image}
-                alt={item.title}
-              />
-
-              <CardBody>
-
-                <Badge>
-                  {item.category}
-                </Badge>
-
-                <EskulTitle>
-                  {item.title}
-                </EskulTitle>
-
-              </CardBody>
-
-            </Card>
-
-          </Link>
-
-        ))}
-
+                  <EskulTitle>{item.title}</EskulTitle>
+                </CardBody>
+              </Card>
+            </Link>
+          ))}
       </CardWrapper>
-
     </Container>
   );
 }
