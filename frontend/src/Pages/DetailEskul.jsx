@@ -17,7 +17,7 @@ const DetailEskul = () => {
 
     window.scrollTo(0, 0);
 
-    fetch(`${BASE_URL}/eskuls/${id}`)
+    fetch(`${BASE_URL}/${id}`)
 
       .then((res) => {
 

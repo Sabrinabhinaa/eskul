@@ -11,13 +11,16 @@ app.get("/", (req, res) => {
   res.send("Backend jalan");
 });
 
+// GET ALL
 app.get("/eskuls", (req, res) => {
   res.json(eskuls);
 });
 
+// GET DETAIL (FIXED)
 app.get("/eskuls/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const eskul = eskuls.find((item) => item.id === id);
+  const id = req.params.id;
+
+  const eskul = eskuls.find((item) => item.id == id);
 
   if (!eskul) {
     return res.status(404).json({ message: "Eskul tidak ditemukan" });
