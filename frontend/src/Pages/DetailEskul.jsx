@@ -152,16 +152,16 @@ const DetailEskul = () => {
           </div>
 
           {/* HERO IMAGE */}
-          <img
-            src={`${BASE_URL}${eskul.image}`}
-            alt={eskul.title}
-            style={{
-              width: "100%",
-              height: "600px",
-              objectFit: "cover",
-              borderRadius: "30px",
-            }}
-          />
+         <img
+          src={eskul.image}
+          alt={eskul.title}
+          style={{
+            width: "100%",
+            height: "600px",
+            objectFit: "cover",
+            borderRadius: "30px",
+          }}
+        />
 
         </div>
 
@@ -323,16 +323,16 @@ const DetailEskul = () => {
 
                 {item.type === "image" ? (
 
-                  <img
-                    src={`${BASE_URL}${item.src}`}
-                    alt=""
-                    style={{
-                      width: "100%",
-                      height: "180px",
-                      objectFit: "cover",
-                      borderRadius: "18px",
-                    }}
-                  />
+                 <img
+  src={item.src}
+  alt=""
+  style={{
+    width: "100%",
+    height: "180px",
+    objectFit: "cover",
+    borderRadius: "18px",
+  }}
+/>
 
                 ) : (
 
@@ -345,9 +345,9 @@ const DetailEskul = () => {
                     }}
                   >
                     <source
-                      src={`${BASE_URL}${item.src}`}
-                      type="video/mp4"
-                    />
+  src={item.src}
+  type="video/mp4"
+/>
                   </video>
 
                 )}
@@ -402,13 +402,13 @@ const DetailEskul = () => {
             {media?.[selectedMedia]?.type === "image" ? (
 
               <img
-                src={`${BASE_URL}${media[selectedMedia].src}`}
-                alt=""
-                style={{
-                  maxWidth: "90%",
-                  maxHeight: "90%",
-                }}
-              />
+  src={media[selectedMedia].src}
+  alt=""
+  style={{
+    maxWidth: "90%",
+    maxHeight: "90%",
+  }}
+/>
 
             ) : (
 
@@ -421,9 +421,9 @@ const DetailEskul = () => {
                 }}
               >
                 <source
-                  src={`${BASE_URL}${media[selectedMedia].src}`}
-                  type="video/mp4"
-                />
+  src={media[selectedMedia].src}
+  type="video/mp4"
+/>
               </video>
 
             )}
