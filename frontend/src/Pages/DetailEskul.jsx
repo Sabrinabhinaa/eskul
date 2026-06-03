@@ -303,14 +303,20 @@ const DetailEskul = () => {
           >
 
             {media.map((item, index) => (
-
               <div
-                key={index}
-                onClick={() => setSelectedMedia(index)}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
+  key={index}
+  onClick={() => setSelectedMedia(index)}
+  style={{
+    cursor: "pointer",
+    transition: "transform 0.2s",
+  }}
+  onMouseEnter={(e) =>
+    (e.currentTarget.style.transform = "scale(1.03)")
+  }
+  onMouseLeave={(e) =>
+    (e.currentTarget.style.transform = "scale(1)")
+  }
+>
 
                 {item.type === "image" ? (
 
@@ -328,16 +334,20 @@ const DetailEskul = () => {
                 ) : (
 
                   <video
-                    style={{
-                      width: "100%",
-                      height: "180px",
-                      objectFit: "cover",
-                      borderRadius: "18px",
+                   muted
+                   playsInline
+                   preload="metadata"
+                   style={{
+                   width: "100%",
+                   height: "180px",
+                   objectFit: "cover",
+                   borderRadius: "18px",
+                   background: "#000",
                     }}
-                  >
+                   >
                     <source
-                      src={`${BASE_URL}${item.src}`}
-                      type="video/mp4"
+                    src={`${BASE_URL}${item.src}#t=0.1`}
+                    type="video/mp4"
                     />
                   </video>
 
