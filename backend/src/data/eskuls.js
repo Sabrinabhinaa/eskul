@@ -91,7 +91,7 @@ const eskuls = [
 
     gallery: [
       "/images/padus1.jpg",
-      "/images/padus2.jpeg",
+      "/images/padus2.jpg",
       "/images/padus3.jpg",
       "/images/padus4.jpg",
       "/images/padus5.jpg",
