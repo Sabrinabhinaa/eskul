@@ -17,7 +17,6 @@ const eskuls = [
       "/images/pramuka5.jpg",
     ],
 
-
     pembinaPutra: "Yusup Ansori, S.Pd.",
     pembinaPutri: "Putri Oktarina, S.Pd.",
 
