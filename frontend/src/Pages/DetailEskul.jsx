@@ -10,17 +10,14 @@ const DetailEskul = () => {
   const [loading, setLoading] = useState(true);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  const API_URL =
-  import.meta.env.VITE_API_URL;
-
-const IMAGE_URL =
-  import.meta.env.VITE_API_URL.replace("/eskuls", "");
+  const BASE_URL =
+    "https://eskul-y2xk.vercel.app";
 
   useEffect(() => {
 
     window.scrollTo(0, 0);
 
-   fetch(`${API_URL}/${id}`)
+    fetch(`${BASE_URL}/eskuls/${id}`)
 
       .then((res) => {
 
@@ -32,24 +29,14 @@ const IMAGE_URL =
       })
 
       .then((data) => {
-
-  console.log("DETAIL DATA:", data);
-  console.log("IMAGE:", data.image);
-  console.log("GALLERY:", data.gallery);
-  console.log("VIDEO:", data.video);
-
-  setEskul(data);
-  setLoading(false);
-
-})
+        setEskul(data);
+        setLoading(false);
+      })
 
       .catch((err) => {
-
-  console.error("DETAIL ERROR:", err);
-
-  setLoading(false);
-
-});
+        console.log(err);
+        setLoading(false);
+      });
 
   }, [id]);
 
@@ -62,17 +49,16 @@ const IMAGE_URL =
   }
 
   // SAFE ARRAY
-  const galleryMedia = Array.isArray(eskul?.gallery)
+  const galleryMedia = Array.isArray(eskul.gallery)
     ? eskul.gallery
     : [];
 
-  const videoMedia = Array.isArray(eskul?.video)
+  const videoMedia = Array.isArray(eskul.video)
     ? eskul.video
-    : eskul?.video
+    : eskul.video
     ? [eskul.video]
     : [];
 
-  // COMBINE MEDIA
   const media = [
     ...galleryMedia.map((item) => ({
       type: "image",
@@ -108,7 +94,6 @@ const IMAGE_URL =
           }}
         >
 
-          {/* BACK BUTTON */}
           <Link
             to="/"
             style={{
@@ -127,7 +112,6 @@ const IMAGE_URL =
             ← Kembali
           </Link>
 
-          {/* TITLE */}
           <div
             style={{
               position: "absolute",
@@ -160,21 +144,20 @@ const IMAGE_URL =
 
           </div>
 
-          {/* HERO IMAGE */}
-         <img
-          src={`${IMAGE_URL}${eskul.image}`}
-          alt={eskul.title}
-          style={{
-            width: "100%",
-            height: "600px",
-            objectFit: "cover",
-            borderRadius: "30px",
-          }}
-        />
+          <img
+            src={`${BASE_URL}${eskul.image}`}
+            alt={eskul.title}
+            style={{
+              width: "100%",
+              height: "600px",
+              objectFit: "cover",
+              borderRadius: "30px",
+            }}
+          />
 
         </div>
 
-        {/* DESCRIPTION */}
+        {/* DESKRIPSI */}
         <div
           style={{
             background: "#fff",
@@ -196,7 +179,7 @@ const IMAGE_URL =
 
         </div>
 
-        {/* INFO CARD */}
+        {/* INFO */}
         <div
           style={{
             display: "grid",
@@ -226,7 +209,6 @@ const IMAGE_URL =
             <p
               style={{
                 color: "#64748B",
-                lineHeight: "1.7",
               }}
             >
               {eskul.pembina ? (
@@ -320,7 +302,7 @@ const IMAGE_URL =
             }}
           >
 
-            {media?.map((item, index) => (
+            {media.map((item, index) => (
 
               <div
                 key={index}
@@ -332,16 +314,16 @@ const IMAGE_URL =
 
                 {item.type === "image" ? (
 
-                 <img
-  src={`${IMAGE_URL}${item.src}`}
-  alt=""
-  style={{
-    width: "100%",
-    height: "180px",
-    objectFit: "cover",
-    borderRadius: "18px",
-  }}
-/>
+                  <img
+                    src={`${BASE_URL}${item.src}`}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "180px",
+                      objectFit: "cover",
+                      borderRadius: "18px",
+                    }}
+                  />
 
                 ) : (
 
@@ -354,9 +336,9 @@ const IMAGE_URL =
                     }}
                   >
                     <source
-  src={`${IMAGE_URL}${item.src}`}
-  type="video/mp4"
-/>
+                      src={`${BASE_URL}${item.src}`}
+                      type="video/mp4"
+                    />
                   </video>
 
                 )}
@@ -370,8 +352,7 @@ const IMAGE_URL =
         </div>
 
         {/* MODAL */}
-        {selectedMedia !== null &&
-          media?.[selectedMedia] && (
+        {selectedMedia !== null && (
 
           <div
             style={{
@@ -408,16 +389,16 @@ const IMAGE_URL =
             </button>
 
             {/* MEDIA */}
-            {media?.[selectedMedia]?.type === "image" ? (
+            {media[selectedMedia].type === "image" ? (
 
               <img
- src={`${IMAGE_URL}${media[selectedMedia].src}`}
-  alt=""
-  style={{
-    maxWidth: "90%",
-    maxHeight: "90%",
-  }}
-/>
+                src={`${BASE_URL}${media[selectedMedia].src}`}
+                alt=""
+                style={{
+                  maxWidth: "90%",
+                  maxHeight: "90%",
+                }}
+              />
 
             ) : (
 
@@ -430,9 +411,9 @@ const IMAGE_URL =
                 }}
               >
                 <source
-  src={`${IMAGE_URL}${media[selectedMedia].src}`}
-  type="video/mp4"
-/>
+                  src={`${BASE_URL}${media[selectedMedia].src}`}
+                  type="video/mp4"
+                />
               </video>
 
             )}
