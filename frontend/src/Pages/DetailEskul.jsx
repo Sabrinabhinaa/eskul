@@ -10,14 +10,17 @@ const DetailEskul = () => {
   const [loading, setLoading] = useState(true);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  const BASE_URL =
-    import.meta.env.VITE_API_URL;
+  const API_URL =
+  import.meta.env.VITE_API_URL;
+
+const IMAGE_URL =
+  import.meta.env.VITE_API_URL.replace("/eskuls", "");
 
   useEffect(() => {
 
     window.scrollTo(0, 0);
 
-    fetch(`${BASE_URL}/${id}`)
+   fetch(`${API_URL}/${id}`)
 
       .then((res) => {
 
@@ -30,17 +33,23 @@ const DetailEskul = () => {
 
       .then((data) => {
 
-        setEskul(data);
-        setLoading(false);
+  console.log("DETAIL DATA:", data);
+  console.log("IMAGE:", data.image);
+  console.log("GALLERY:", data.gallery);
+  console.log("VIDEO:", data.video);
 
-      })
+  setEskul(data);
+  setLoading(false);
+
+})
 
       .catch((err) => {
 
-        console.log(err);
-        setLoading(false);
+  console.error("DETAIL ERROR:", err);
 
-      });
+  setLoading(false);
+
+});
 
   }, [id]);
 
@@ -153,7 +162,7 @@ const DetailEskul = () => {
 
           {/* HERO IMAGE */}
          <img
-          src={eskul.image}
+          src={`${IMAGE_URL}${eskul.image}`}
           alt={eskul.title}
           style={{
             width: "100%",
@@ -324,7 +333,7 @@ const DetailEskul = () => {
                 {item.type === "image" ? (
 
                  <img
-  src={item.src}
+  src={`${IMAGE_URL}${item.src}`}
   alt=""
   style={{
     width: "100%",
@@ -345,7 +354,7 @@ const DetailEskul = () => {
                     }}
                   >
                     <source
-  src={item.src}
+  src={`${IMAGE_URL}${item.src}`}
   type="video/mp4"
 />
                   </video>
@@ -402,7 +411,7 @@ const DetailEskul = () => {
             {media?.[selectedMedia]?.type === "image" ? (
 
               <img
-  src={media[selectedMedia].src}
+ src={`${IMAGE_URL}${media[selectedMedia].src}`}
   alt=""
   style={{
     maxWidth: "90%",
@@ -421,7 +430,7 @@ const DetailEskul = () => {
                 }}
               >
                 <source
-  src={media[selectedMedia].src}
+  src={`${IMAGE_URL}${media[selectedMedia].src}`}
   type="video/mp4"
 />
               </video>

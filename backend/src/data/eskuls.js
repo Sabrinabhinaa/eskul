@@ -40,9 +40,13 @@ const eskuls = [
       "/images/pmr2.jpg",
       "/images/pmr3.jpg",
       "/images/pmr4.jpg",
+      "/images/pmr5.jpg",
     ],
 
-    video: ["/videos/pmr.mp4"],
+    video: [
+      "/videos/pmr.mp4",
+      "/videos/pmr1.mp4",
+    ],
 
     pembina: "Dela Rizkia, S.Pd.",
 
@@ -91,9 +95,13 @@ const eskuls = [
       "/images/padus2.jpeg",
       "/images/padus3.jpg",
       "/images/padus4.jpg",
+      "/images/padus5.jpg",
     ],
 
-    video: ["/videos/padus.mp4"],
+    video: [
+      "/videos/padus.mp4",
+      "/videos/padus1.mp4",
+    ],
 
     pembina: "Andini Putri Nadira",
     category: "MUSIK",
@@ -114,6 +122,7 @@ const eskuls = [
       "/images/marching2.jpg",
       "/images/marching3.jpg",
       "/images/marching4.jpg",
+      "/images/marching5.jpg",
     ],
 
      video: ["/videos/marchingband.mp4"],
@@ -186,7 +195,6 @@ const eskuls = [
       "/images/bulutangkis1.jpg",
       "/images/bulutangkis2.jpg",
       "/images/bulutangkis3.jpg",
-      "/images/bulutangkis4.jpg",
     ],
 
     video: ["/videos/bulutangkis.mp4"],
